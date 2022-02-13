@@ -1,0 +1,97 @@
+{% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week Counter</title>
+    <link rel="stylesheet" href="{% static '/css/moderna.css' %}">
+    <style>
+        .datepicker{
+            font-size: 30px;
+        }
+        .example-button{
+            cursor: pointer;
+        }
+        .number{
+            font-size: 180px;
+        }
+        .result{
+            width: fit-content;
+            position: relative;
+        }
+        .postfix{
+            position: absolute;
+            top: 30px;
+            font-size: 30px;
+        }
+        .week{
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+    <main class="mt-5">
+        <article class="container pa-5">
+            {% if success %}
+                <div class="item text-item pl-5">
+                    <h2 class="title mb-1">{{ date }}</h2>
+                    <div>
+                        <div class="result">
+                            <span class="number">{{ week }}</span>
+                            <span class="postfix">{{ postfix }}</span>
+                            <span class="week">week</span>
+                        </div>
+                        
+                    </div>
+                    <p class="subtitle">since January 1, 2019</p>
+                    <br>
+                    
+                    <a href="/api/{{ date }}" target="_blank">Get in JSON</a>
+                    <br>
+                    <div class="mt-5">
+                        <a class="button example-button mt-5" href="/">Calculate new date</a>
+                    </div>
+                    
+                    
+                </div>
+            {% else %}
+                <div class="item text-item pl-5">
+                    <h2 class="title mb-1">Error</h2>
+                    <p class="subtitle">{{ message }}</p>
+                    <br>
+                    
+                    <p>Choose date below</p>
+                    <div class="mb-2">
+                        <input id="datepicker" class="datepicker" type="date" name="date" min="2019-01-01" value="{{ date }}" />
+                        <button class="button example-button ma-2" onclick="calculate()">CALCULATE</button>
+                    </div>
+                    <button class="button example-button" onclick="filldate('today')">Today</button>
+                    <button class="button example-button ma-2" onclick="filldate('2019-01-06')">6/01/2019</button>
+                </div>
+            {% endif %}
+            <div class="item image-item">
+                <img class="image"  src="{% static '/img/banner.webp' %}" alt="">
+            </div>
+        </article>
+    </main>
+    <script>
+        function calculate(){
+            date = document.getElementById('datepicker').value;
+            window.location.href = "/" + date;
+        }
+        function filldate(value){
+            if (value == 'today'){
+                document.getElementById('datepicker').valueAsDate = new Date();
+            }else{
+                document.getElementById('datepicker').value = value
+            }
+        }
+    </script>
+    <!-- <p class="sign">Made by Moderna</p> -->
+</body>
+</html>
+
+
+
+

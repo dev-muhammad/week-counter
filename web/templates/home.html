@@ -1,0 +1,59 @@
+{% load static %} 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week Counter</title>
+    <link rel="stylesheet" href="{% static '/css/moderna.css' %}">
+    <style>
+        .datepicker{
+            font-size: 30px;
+        }
+        .example-button{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <main class="mt-5">
+        <!-- First screen -->
+        <article class="container pa-5 full-height">
+            <div class="item text-item pl-5">
+                <h2 class="title mb-1">Week Counter</h2>
+                <p class="subtitle">This Week Calculator can calculate how many weeks since January 1, 2019.</p>
+                <br>
+                
+                <p>Choose date below</p>
+                <div class="mb-2">
+                    <input id="datepicker" class="datepicker" type="date" name="date" min="2019-01-01" />
+                    <button class="button example-button ma-2" onclick="calculate()">CALCULATE</button>
+                </div>
+                <button class="button example-button" onclick="filldate('today')">Today</button>
+                <button class="button example-button ma-2" onclick="filldate('2019-01-06')">6/01/2019</button>
+            </div>
+            <div class="item image-item">
+                <img class="image"  src="{% static '/img/banner.webp' %}" alt="">
+            </div>
+        </article>
+    </main>
+    <script>
+        function calculate(){
+            date = document.getElementById('datepicker').value;
+            window.location.href = "/" + date;
+        }
+        function filldate(value){
+            if (value == 'today'){
+                document.getElementById('datepicker').valueAsDate = new Date();
+            }else{
+                document.getElementById('datepicker').value = value
+            }
+        }
+    </script>
+    <!-- <p class="sign">Made by Moderna</p> -->
+</body>
+</html>
+
+
+
+
